@@ -1,39 +1,54 @@
-import React, { useState } from 'react'
+import { useState } from "react";
 
 function App() {
-const [color,setColor] = useState('bg-white')
+
+  // Characters to choose from
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  // State to store the generated password
+  const [pass, setPass] = useState("");
+
+  // Function to generate password
+  function generatePassword() {
+
+    let password = "";
+
+    // Generate an 8-character password
+    for (let i = 0; i < 5; i++) {
+
+      let randomIndex = Math.floor(Math.random() * chars.length);
+
+      password += chars[randomIndex];
+
+    }
+
+    setPass(password);
+  }
+
   return (
-<div className={`h-screen ${color} flex flex-col items-center justify-center transition-all duration-500`}>
+    <div className="flex flex-col items-center justify-center bg-purple-200 h-screen">
 
-<div className='flex flex-col bg-white  w-{500px} shadow-2xl rounded-xl'>
-    
-  <h1 className=' m-4 flex justify-center'>Color Changing </h1>
-  <p className=' m-4 flex justify-center'>press buttons to chnage color </p>
-  <button 
-  className='p-4 bg-red-100 rounded-xl m-3'
-  onClick = {() => setColor('bg-red-600')} >
-    press to change to red
-  </button>
-    <button className='p-4 bg-yellow-100 rounded-xl m-3'
-  onClick = {() => setColor('bg-yellow-300')} >
-    press to change to yellow
-  </button>
-  <button className='p-4 bg-green-100 rounded-xl m-3'
-  onClick = {() => setColor('bg-green-200')} >
-    press to change to green
-  </button>
-    <button className='p-4 bg-purple-100 rounded-xl m-3'
-  onClick = {() => setColor('bg-purple-200')} >
-    press to change to purple
-  </button>
-    <button className='p-4 bg-white rounded-xl m-3'
-  onClick = {() => setColor('bg-white')} >
-    press to change to default
-  </button>
-</div>
-</div>
+      <h1 className="text-4xl mb-8 border border-black shadow-xl rounded-lg p-5 bg-white">
+        Password Generator
+      </h1>
 
-  )
+      <button
+        onClick={generatePassword}
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-xl"
+      >
+        Generate Password
+      </button>
+
+      <p className="text-2xl font-bold mt-8">
+        Generated Password:
+      </p>
+
+      <p className="text-3xl font-mono bg-white px-6 py-3 rounded-lg shadow-lg mt-3">
+        {pass}
+      </p>
+
+    </div>
+  );
 }
 
-export default App
+export default App;
